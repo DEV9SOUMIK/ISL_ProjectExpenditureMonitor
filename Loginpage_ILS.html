@@ -4,51 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Login</title> <!-- Title of the login page -->
+
+    <!-- Adding CSS styling inside the <style> tag -->
+    <style>
+        /* This makes the whole table cover the full screen height and width */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif; /* Makes the text easy to read */
+            background-color: #f0f0f0; /* Light gray background */
+        }
+
+        /* The main container where the login form is placed */
+        .login-container {
+            display: flex; /* Centers the login box */
+            justify-content: center; /* Horizontally center the box */
+            align-items: center; /* Vertically center the box */
+            height: 100vh; /* Full height of the screen */
+        }
+
+        /* Styling the login box */
+        .login-box {
+            background-color: #fff; /* White background for the login box */
+            border-radius: 15px; /* Rounded corners for smooth edges */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds shadow to the box */
+            padding: 30px; /* Space inside the box */
+            width: 350px; /* Fixed width for the login box */
+            text-align: center; /* Center the text inside the box */
+        }
+
+        /* The heading that says 'Employee Login' */
+        h2 {
+            font-size: 28px; /* Larger heading size */
+            color: #333; /* Dark gray color */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        /* All labels like 'Email' and 'Password' */
+        label {
+            font-size: 18px; /* Slightly larger text */
+            color: #555; /* Medium gray color for labels */
+            display: block; /* Makes labels appear on separate lines */
+            margin-bottom: 10px; /* Space between label and input */
+        }
+
+        /* Email and password input fields */
+        input[type="email"], input[type="password"] {
+            width: 100%; /* Full width input fields */
+            padding: 12px; /* Space inside the input box */
+            margin-bottom: 20px; /* Space between inputs */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px; /* Rounded corners for inputs */
+            font-size: 16px; /* Medium-sized text */
+            box-sizing: border-box; /* Makes padding not affect the width */
+        }
+
+        /* The submit button for login */
+        button {
+            background-color: #4CAF50; /* Green background for button */
+            color: white; /* White text */
+            padding: 12px 20px; /* Space inside the button */
+            border: none; /* Removes default border */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Changes mouse cursor to pointer */
+            font-size: 18px; /* Bigger text for button */
+            transition: background-color 0.3s; /* Smooth background color change */
+            width: 100%; /* Full width button */
+        }
+
+        /* Change the button color when hovering over it */
+        button:hover {
+            background-color: #45a049; /* Darker green when hovered */
+        }
+    </style>
 </head>
 <body>
-    <!-- Table to center the login form vertically and horizontally on the page -->
-    <table style="height: 100vh; width: 100vw;">
-        <tr>
-            <td style="text-align: center; vertical-align: middle;">
-                <h2 style="font-size: 24px;">Employee Login</h2> <!-- Heading for the login page -->
+    <!-- Main container to center the login box -->
+    <div class="login-container">
+        <!-- Login box with smooth edges and content centered -->
+        <div class="login-box">
+            <!-- Title for the login box -->
+            <h2>Employee Login</h2> <!-- Heading placed above the box -->
 
-                <!-- Login form -->
-                <!-- action attribute defines the URL of the page to load after form submission (redirects to the project management page) -->
-                <!-- method="GET" specifies how the form data will be sent -->
-                <form action="PD_ProjectManagerPage_ILS.html" method="GET">
-                    <table style="margin: 0 auto; font-size: 18px;"> <!-- Centers the form and sets the font size -->
-                        <tr>
-                            <td style="text-align: right;">
-                                <!-- Label for the email input field -->
-                                <label for="email">Email:</label>
-                            </td>
-                            <td>
-                                <!-- Email input field -->
-                                <input type="email" id="email" name="email" style="font-size: 16px; padding: 6px;" required> <!-- "required" ensures the field must be filled before submission -->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; padding-top: 12px;">
-                                <!-- Label for the password input field -->
-                                <label for="password">Password:</label>
-                            </td>
-                            <td style="padding-top: 12px;">
-                                <!-- Password input field -->
-                                <input type="password" id="password" name="password" style="font-size: 16px; padding: 6px;" required> <!-- "required" ensures the field must be filled before submission -->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="text-align: center; padding-top: 20px;">
-                                <!-- Instructions and submit button for the form -->
-                                <span style="font-size: 16px; margin-right: 10px;">Click to Submit</span>
-                                <!-- Submit button that sends the form data and redirects to the project management page -->
-                                <button type="submit" style="font-size: 18px; padding: 8px 16px;">Login</button>
-                            </td>
-                        </tr>
-                    </table>
-                </form> <!-- End of the login form -->
-            </td>
-        </tr>
-    </table>
+            <!-- Login form starts here -->
+            <form action="PD_ProjectManagerPage_ILS.html" method="GET">
+                <!-- Label and input field for email -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <!-- Label and input field for password -->
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <!-- Submit button to login -->
+                <button type="submit">Login</button>
+            </form> <!-- End of the login form -->
+        </div> <!-- End of the login box -->
+    </div> <!-- End of the main container -->
 </body>
 </html>
+
