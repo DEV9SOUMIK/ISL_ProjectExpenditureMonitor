@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login</title> <!-- Title of the login page -->
+</head>
+<body>
+    <!-- Table to center the login form vertically and horizontally on the page -->
+    <table style="height: 100vh; width: 100vw;">
+        <tr>
+            <td style="text-align: center; vertical-align: middle;">
+                <h2 style="font-size: 24px;">Employee Login</h2> <!-- Heading for the login page -->
+
+                <!-- Login form -->
+                <!-- action attribute defines the URL of the page to load after form submission (redirects to the project management page) -->
+                <!-- method="GET" specifies how the form data will be sent -->
+                <form action="PD_ProjectManagerPage_ILS.html" method="GET">
+                    <table style="margin: 0 auto; font-size: 18px;"> <!-- Centers the form and sets the font size -->
+                        <tr>
+                            <td style="text-align: right;">
+                                <!-- Label for the email input field -->
+                                <label for="email">Email:</label>
+                            </td>
+                            <td>
+                                <!-- Email input field -->
+                                <input type="email" id="email" name="email" style="font-size: 16px; padding: 6px;" required> <!-- "required" ensures the field must be filled before submission -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; padding-top: 12px;">
+                                <!-- Label for the password input field -->
+                                <label for="password">Password:</label>
+                            </td>
+                            <td style="padding-top: 12px;">
+                                <!-- Password input field -->
+                                <input type="password" id="password" name="password" style="font-size: 16px; padding: 6px;" required> <!-- "required" ensures the field must be filled before submission -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center; padding-top: 20px;">
+                                <!-- Instructions and submit button for the form -->
+                                <span style="font-size: 16px; margin-right: 10px;">Click to Submit</span>
+                                <!-- Submit button that sends the form data and redirects to the project management page -->
+                                <button type="submit" style="font-size: 18px; padding: 8px 16px;">Login</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form> <!-- End of the login form -->
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
