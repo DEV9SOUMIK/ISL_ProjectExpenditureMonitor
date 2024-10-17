@@ -1,3 +1,198 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: small; /* Set global font size to small */
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #top-section {
+            position: relative; /* Allows centering the project name */
+            padding: 20px;
+            border-bottom: 2px solid #000;
+            height: 40%;
+        }
+        #project-name {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%); /* Centers the project name */
+            text-align: center;
+        }
+        #project-info {
+            margin-top: 40px; /* Adds space below project name */
+            text-align: left; /* Aligns project info to the left */
+        }
+        #project-info p {
+            margin: 5px 0;
+        }
+        #top-section .project-info {
+            font-weight: bold;
+        }
+        #top-section .financial-report-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: small; /* Set button font size to small */
+        }
+        /* Bottom Section Styling */
+        #bottom-section {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            height: 60%;
+        }
+        .expenditure-section {
+            margin-bottom: 15px;
+        }
+        .expenditure-section h3 {
+            margin-bottom: 5px;
+        }
+        .expenditure-section input {
+            width: 100%;
+            padding: 10px;
+            font-size: small; /* Set input font size to small */
+            margin-bottom: 10px;
+        }
+        .expenditure-section button {
+            padding: 8px 16px;
+            font-size: small; /* Set button font size to small */
+        }
+        .manpower-table {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .manpower-table th, .manpower-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+            font-size: small; /* Set table font size to small */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <!-- Top Section for Project Info -->
+        <div id="top-section">
+            <div id="project-name">
+                <h2>Project Name: <span class="project-info">Your Project Name</span></h2>
+            </div>
+            <div id="project-info">
+                <p>User: <span class="project-info">John Doe</span></p>
+                <p>Total Budget: <span class="project-info">₹1,000,000</span></p>
+                <p>Capital Blocked: <span class="project-info">₹400,000</span></p>
+                <p>Capital Free: <span class="project-info">₹600,000</span></p>
+                <p>Ending Year: <span class="project-info">2025</span></p>
+                <button class="financial-report-btn" onclick="createFinancialReport()">Create Financial Report</button>
+            </div>
+        </div>
+
+        <!-- Bottom Section for Expenditures with Indent Buttons -->
+        <div id="bottom-section">
+            <!-- Manpower Expenses with additional details -->
+            <div class="expenditure-section">
+                <h3>Manpower Expenses (Recurring)</h3>
+
+                <!-- Manpower Entry Table -->
+                <table class="manpower-table" id="manpowerTable">
+                    <thead>
+                        <tr>
+                            <th>Month of Entry</th>
+                            <th>Name of Employee</th>
+                            <th>Employee ID</th>
+                            <th>Department</th>
+                            <th>Salary Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" placeholder="Month of Entry"></td>
+                            <td><input type="text" placeholder="Employee Name"></td>
+                            <td><input type="text" placeholder="Employee ID"></td>
+                            <td><input type="text" placeholder="Department"></td>
+                            <td><input type="number" placeholder="Salary Amount"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Button to add a new row for another employee -->
+                <button onclick="addManpowerRow()">Add New Row</button>
+                <form action="Indentpage_ILS.html">
+                <button onclick="createIndent('Manpower')" type="submit">Create Indent</button></form>
+            </div>
+
+            <!-- Other expenditure sections with indent buttons -->
+            <div class="expenditure-section">
+                <h3>Consumables Expenditures (Recurring)</h3>
+                <input type="number" placeholder="Enter consumables expenditures">
+                <form action="Indentpage_ILS.html">
+                <button onclick="createIndent('Consumables')">Create Indent</button></form>
+            </div>
+            <div class="expenditure-section">
+                <h3>Traveling Expenditures (Recurring)</h3>
+                <input type="number" placeholder="Enter traveling expenditures">
+                <form action="Indentpage_ILS.html">
+                <button onclick="createIndent('Traveling')">Create Indent</button></form>
+            </div>
+            <div class="expenditure-section">
+                <h3>Contingency Expenditures (Recurring)</h3>
+                <input type="number" placeholder="Enter contingency expenditures">
+                <form action="Indentpage_ILS.html">
+                <button onclick="createIndent('Contingency')">Create Indent</button></form>
+            </div>
+
+            <!-- Non-recurring Expenditure -->
+            <div class="expenditure-section">
+                <h3>Equipment Expenditure (Non-recurring)</h3>
+                <input type="number" placeholder="Enter equipment expenditure">
+                <form action="Indentpage_ILS.html">
+                <button onclick="createIndent('Equipment')">Create Indent</button></form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new row in Manpower section
+        function addManpowerRow() {
+            const manpowerTable = document.getElementById("manpowerTable").getElementsByTagName('tbody')[0];
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="Month of Entry"></td>
+                <td><input type="text" placeholder="Employee Name"></td>
+                <td><input type="text" placeholder="Employee ID"></td>
+                <td><input type="text" placeholder="Department"></td>
+                <td><input type="number" placeholder="Salary Amount"></td>
+            `;
+            manpowerTable.appendChild(newRow);
+        }
+
+        // This function will generate the financial report when the button is clicked
+        function createFinancialReport() {
+            alert("Generating financial report...");
+            // You can add actual financial report generation logic here
+        }
+
+        // This function handles the creation of an indent for different expenditure sections
+        function createIndent(expenditureType) {
+            alert(`Creating indent for ${expenditureType} expenditure...`);
+            // You can add actual indent creation logic here
+        }
+    </script>
+
+</body>
+</html>
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,3 +381,4 @@
 
 </body>
 </html>
+>>>>>>> 8da1b7f741506df38f8c823366a43c3d6b543b6d

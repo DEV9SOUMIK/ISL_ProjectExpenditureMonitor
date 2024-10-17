@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,3 +199,205 @@
 
 
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Page - Payments Department</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+        #sidebar {
+            width: 25%;
+            padding: 20px;
+            border-right: 1px solid #000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        #main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+        }
+        #notificationPanel {
+            flex: 1; /* Takes less space for notifications */
+            border-right: 2px solid #000; /* Divider line */
+            padding-right: 20px; /* Padding for the panel */
+        }
+        #projectTableContainer {
+            flex: 2; /* Takes more space for projects */
+            margin-left: 20px; /* Space between notification and project tables */
+        }
+        table {
+            margin: 20px 0;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 16px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        button {
+            font-size: 16px;
+            padding: 5px 10px;
+            margin-right: 10px; /* Adds space between buttons */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <h2>Payments Department</h2>
+            <p><strong>Name:</strong> Sarah Connor</p>
+            <p><strong>Email:</strong> sarahconnor@example.com</p>
+            <p><strong>Notifications:</strong> <span id="notificationCount">0</span></p>
+        </div>
+        <div id="main">
+            <div id="notificationPanel">
+                <h3>Notifications</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Notification Date</th>
+                            <th>Project Name</th>
+                            <th>Project Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notificationTable">
+                        <!-- Notifications will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="projectTableContainer">
+                <h2 style="text-align: center;">Project Management</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Number</th>
+                            <th>Total Budget</th>
+                            <th>Ending Year</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectTable">
+                        <!-- Projects will be added here dynamically -->
+                    </tbody>
+                </table>
+
+                <button id="reportButton" onclick="generateFinancialReport()">Create Financial Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let projects = []; // Array to hold project details
+        let notifications = []; // Array to hold notification details
+
+        // Sample data for demonstration purposes
+        notifications.push({ date: "2024-10-10", projectName: "Project Alpha", projectNumber: "001" });
+        notifications.push({ date: "2024-10-11", projectName: "Project Beta", projectNumber: "002" });
+
+        function displayProjects() {
+            const projectTable = document.getElementById("projectTable");
+            projectTable.innerHTML = ''; // Clear previous entries
+
+            // Sample projects for demonstration
+            projects.push({ name: "Project A", number: "001", budget: "10000", endYear: "2025" });
+            projects.push({ name: "Project B", number: "002", budget: "20000", endYear: "2026" });
+
+            projects.forEach(project => {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td><input type="text" value="${project.name}" readonly></td>
+                    <td><input type="text" value="${project.number}" readonly></td>
+                    <td><input type="number" value="${project.budget}" readonly></td>
+                    <td><input type="number" value="${project.endYear}" readonly></td>
+                    <td>
+                        <button onclick="saveProject(this)">Open</button>
+                    </td>
+                `;
+                projectTable.appendChild(newRow);
+            });
+        }
+
+        function displayNotifications() {
+            const notificationTable = document.getElementById("notificationTable");
+            notificationTable.innerHTML = ''; // Clear previous entries
+
+            notifications.forEach(notification => {
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${notification.date}</td>
+                    <td>${notification.projectName}</td>
+                    <td>${notification.projectNumber}</td>
+                    <td>
+                        <button onclick="inspectNotification('${notification.projectNumber}')">Inspect</button>
+                    </td>
+                `;
+                notificationTable.appendChild(newRow);
+            });
+
+            updateNotificationCount();
+        }
+
+        function updateNotificationCount() {
+            const notificationCount = document.getElementById("notificationCount");
+            notificationCount.textContent = notifications.length;
+        }
+
+        function inspectNotification(projectNumber) {
+            const notification = notifications.find(n => n.projectNumber === projectNumber);
+            if (notification) {
+                alert(`Notification Details:\nDate: ${notification.date}\nProject Name: ${notification.projectName}\nProject Number: ${notification.projectNumber}`);
+            } else {
+                alert("Notification not found.");
+            }
+        }
+
+        function generateFinancialReport() {
+            if (projects.length === 0) {
+                alert("No projects to generate a report for.");
+                return;
+            }
+
+            let reportContent = "Financial Report\n\n";
+            projects.forEach((project, index) => {
+                reportContent += `Project ${index + 1}:\n`;
+                reportContent += `Name: ${project.name}\n`;
+                reportContent += `Number: ${project.number}\n`;
+                reportContent += `Total Budget: ${project.budget}\n`;
+                reportContent += `Ending Year: ${project.endYear}\n`;
+                reportContent += "----------------------\n";
+            });
+
+            // For debugging: displays the report in console
+            console.log(reportContent);
+
+            // Display the report in an alert (or you could create a downloadable file instead)
+            alert(reportContent);
+        }
+
+        // Initial display of projects and notifications
+        displayProjects();
+        displayNotifications();
+    </script>
+</body>
+</html>
+
+
+
+
+
+>>>>>>> 8da1b7f741506df38f8c823366a43c3d6b543b6d

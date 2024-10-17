@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indent Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .project-details {
+            position: absolute;
+            top: 10px;
+            left: 20px; /* Moved to the left */
+            text-align: left;
+        }
+
+        .project-details p {
+            margin: 0;
+            padding: 5px;
+            font-size: 1em;
+        }
+
+        .create-table-btn, .add-row-btn, .print-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .create-table-btn:hover, .add-row-btn:hover, .print-btn:hover {
+            background-color: #218838;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Indent</h1>
+
+        <div class="project-details">
+            <p>Project Name: XYZ Project</p>
+            <p>Project ID: 12345</p>
+            <p>Total Budget: ₹ 1,000,000</p>
+            <p>Blocked Capital: ₹ 200,000</p>
+            <p>Capital Free: ₹ 800,000</p>
+        </div>
+
+        <button class="create-table-btn" onclick="createTable()">Create Table</button>
+
+        <div id="table-container"></div>
+
+        <button class="add-row-btn" onclick="addRow()" style="display:none;">Add New Row</button> <!-- Initially hidden -->
+        <button class="print-btn" onclick="window.print()" style="display:none;">Print</button> <!-- Print button initially hidden -->
+    </div>
+
+    <script>
+        function createTable() {
+            // Get the table container div
+            const tableContainer = document.getElementById('table-container');
+
+            // Create table element
+            const table = document.createElement('table');
+            table.id = 'indentTable';
+
+            // Create table header row
+            const headerRow = document.createElement('tr');
+            const headers = ['Item Name', 'Quantity', 'Price per Unit (₹)', 'Total Cost (₹)'];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+
+            // Create a few editable rows as an example
+            for (let i = 0; i < 3; i++) {
+                addRow(table);
+            }
+
+            // Add the total row at the bottom
+            const totalRow = document.createElement('tr');
+            totalRow.classList.add('total-row');
+            const totalCell = document.createElement('td');
+            totalCell.colSpan = 3;
+            totalCell.textContent = 'Total Amount';
+            totalRow.appendChild(totalCell);
+
+            const totalAmountCell = document.createElement('td');
+            totalAmountCell.id = 'totalAmount';
+            totalAmountCell.textContent = '₹ 0'; // Initially set total amount to 0
+            totalRow.appendChild(totalAmountCell);
+
+            table.appendChild(totalRow);
+
+            // Clear any existing table and append the new one
+            tableContainer.innerHTML = '';
+            tableContainer.appendChild(table);
+
+            // Show the "Add New Row" button and the "Print" button after the table is created
+            document.querySelector('.add-row-btn').style.display = 'inline-block';
+            document.querySelector('.print-btn').style.display = 'inline-block';
+
+            // Add event listener to calculate total amount whenever quantity, price, or total cost is changed
+            table.addEventListener('input', calculateTotal);
+        }
+
+        function addRow(table = null) {
+            if (!table) {
+                table = document.getElementById('indentTable');
+            }
+
+            // Create a new row
+            const newRow = document.createElement('tr');
+
+            // Create 3 editable cells for item name, quantity, and price
+            for (let i = 0; i < 3; i++) {
+                const td = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.style.width = '100%';
+                td.appendChild(input);
+                newRow.appendChild(td);
+            }
+
+            // Create an editable total cost cell
+            const totalCostTd = document.createElement('td');
+            const totalCostInput = document.createElement('input');
+            totalCostInput.type = 'text';
+            totalCostInput.style.width = '100%';
+            totalCostInput.value = '₹ 0'; // Default value
+            totalCostTd.appendChild(totalCostInput);
+            newRow.appendChild(totalCostTd);
+
+            // Insert the new row before the last row (total row)
+            const totalRow = document.querySelector('.total-row');
+            table.insertBefore(newRow, totalRow);
+        }
+
+        function calculateTotal() {
+            const rows = document.querySelectorAll('#indentTable tr:not(.total-row)');
+
+            let totalAmount = 0;
+
+            rows.forEach(row => {
+                const quantity = row.children[1].querySelector('input').value;
+                const price = row.children[2].querySelector('input').value;
+                const totalCostCell = row.children[3].querySelector('input');
+
+                // Automatically calculate total cost if both quantity and price are filled
+                const totalCost = (quantity && price) ? quantity * price : parseFloat(totalCostCell.value.replace(/[^0-9.-]+/g,"")) || 0;
+                
+                // If auto-calculated, update the total cost input value
+                if (quantity && price) {
+                    totalCostCell.value = '₹ ' + totalCost;
+                }
+
+                totalAmount += totalCost;
+            });
+
+            // Update the total amount cell
+            document.getElementById('totalAmount').textContent = '₹ ' + totalAmount;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
